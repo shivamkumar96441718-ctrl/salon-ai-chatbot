@@ -7,7 +7,7 @@ st.set_page_config(
     page_icon="✨",
     layout="wide"
 )
-
+st.write("Available Secret Names:", list(st.secrets.keys()))
 st.markdown("""
 <style>
 .stApp {
