@@ -1,15 +1,13 @@
 
 import streamlit as st
-from google import genai
+from groq import Groq
 
-# PAGE SETTINGS
 st.set_page_config(
     page_title="Beauty AI Assistant",
     page_icon="✨",
     layout="wide"
 )
 
-# PREMIUM DESIGN
 st.markdown("""
 <style>
 .stApp {
@@ -32,44 +30,34 @@ h1, h2, h3, p, label {
     border: 1px solid #51406e;
     min-height: 125px;
 }
-.stButton button {
-    border-radius: 12px;
-    border: 1px solid #9064cf;
-}
 </style>
 """, unsafe_allow_html=True)
 
-# SALON INFORMATION
-salon_info = """
-You are Beauty AI, a professional salon assistant.
+SYSTEM_PROMPT = """
+You are Beauty AI, a professional salon customer support assistant.
 
 Available services:
 1. Haircut
 2. Hair Spa
 3. Facial
 
-Prices: Not provided.
-Location: Not provided.
-Opening hours: Not provided.
+Prices, location and opening hours are not provided.
 
 Rules:
-- Speak naturally and politely.
+- Speak politely and naturally.
 - Answer in the customer's language.
-- Give detailed but simple answers.
-- Never invent prices, locations or timings.
-- Help customers with salon bookings.
+- Never invent prices or timings.
+- Help customers understand services and booking.
 """
 
-# HEADER
 st.markdown("""
 <div class="hero">
-    <h1>✨ Beauty AI Assistant</h1>
-    <p>Your Personal Salon Support Assistant</p>
-    <p>🤖 Powered by Gemini AI</p>
+<h1>✨ Beauty AI Assistant</h1>
+<p>Your Personal Salon Support Assistant</p>
+<p>🤖 Powered by Groq AI</p>
 </div>
 """, unsafe_allow_html=True)
 
-# SERVICES
 st.subheader("💎 Our Premium Services")
 
 col1, col2, col3 = st.columns(3)
@@ -99,55 +87,22 @@ with col3:
     """, unsafe_allow_html=True)
 
 st.divider()
-
-# AI CHATBOT
 st.subheader("🤖 Chat With Beauty AI")
-st.caption("Ask me anything about our salon services!")
 
-# INITIALIZE CHAT
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-if "chat" not in st.session_state:
-    st.session_state.chat = None
-
-# RESET CHAT
 if st.button("🔄 New Conversation"):
     st.session_state.messages = []
-    st.session_state.chat = None
     st.rerun()
 
-# QUICK QUESTIONS
-st.write("**Quick Questions:**")
-
-q1, q2, q3 = st.columns(3)
-
-with q1:
-    if st.button("Our Services"):
-        st.session_state.pending_prompt = "What services do you provide?"
-
-with q2:
-    if st.button("Haircut Details"):
-        st.session_state.pending_prompt = "Tell me about your haircut service."
-
-with q3:
-    if st.button("Booking Help"):
-        st.session_state.pending_prompt = "How can I book an appointment?"
-
-# SHOW CHAT HISTORY
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# GET USER MESSAGE
 user_message = st.chat_input("Message Beauty AI...")
 
-if "pending_prompt" in st.session_state:
-    user_message = st.session_state.pop("pending_prompt")
-
-# SEND TO GEMINI
 if user_message:
-
     st.session_state.messages.append({
         "role": "user",
         "content": user_message
@@ -157,40 +112,28 @@ if user_message:
         st.markdown(user_message)
 
     with st.chat_message("assistant"):
-
         try:
-            if st.session_state.chat is None:
+            client = Groq(
+                api_key=st.secrets["GROQ_API_KEY"]
+            )
 
-                api_key = st.secrets["GEMINI_API_KEY"]
-
-                client = genai.Client(
-                    api_key=api_key
-                )
-
-                st.session_state.chat = client.chats.create(
-                    model="gemini-2.5-flash",
-                    config={
-                        "system_instruction": salon_info
-                    }
-                )
+            chat_messages = [
+                {"role": "system", "content": SYSTEM_PROMPT}
+            ] + st.session_state.messages
 
             with st.spinner("Beauty AI is thinking..."):
-
-                response = st.session_state.chat.send_message(
-                    user_message
+                response = client.chat.completions.create(
+                    model="llama-3.3-70b-versatile",
+                    messages=chat_messages
                 )
 
-                answer = response.text
-
+            answer = response.choices[0].message.content
             st.markdown(answer)
 
         except Exception as e:
-            answer = (
-                "Sorry, I could not connect to AI right now. "
-                "Please check the API settings and try again."
-            )
+            answer = "Sorry, AI connection failed. Please try again."
             st.error(answer)
-            st.caption(str(e))
+            st.code(str(e))
 
     st.session_state.messages.append({
         "role": "assistant",
@@ -198,43 +141,26 @@ if user_message:
     })
 
 st.divider()
-
-# APPOINTMENT SECTION
 st.subheader("📅 Appointment Request")
 
 with st.form("appointment_form"):
-
-    customer_name = st.text_input("Customer Name")
-
+    name = st.text_input("Customer Name")
     service = st.selectbox(
         "Select Service",
         ["Haircut", "Hair Spa", "Facial"]
     )
+    appointment_date = st.date_input("Appointment Date")
 
-    appointment_date = st.date_input(
-        "Select Appointment Date"
-    )
+    submitted = st.form_submit_button("Submit Request")
 
-    submit = st.form_submit_button(
-        "Submit Appointment Request"
-    )
-
-    if submit:
-
-        if customer_name.strip():
-
-            st.success(
-                f"Demo request received for {customer_name}!"
-            )
-
+    if submitted:
+        if name.strip():
+            st.success("Demo appointment request received!")
+            st.write("Name:", name)
             st.write("Service:", service)
             st.write("Date:", appointment_date)
-
-            st.info(
-                "This is a demo request, not a confirmed appointment."
-            )
-
+            st.info("This is not a confirmed appointment.")
         else:
             st.warning("Please enter your name.")
 
-st.caption("Beauty AI | Powered by Gemini")
+st.caption("Beauty AI | Powered by Groq")
