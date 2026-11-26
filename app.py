@@ -143,7 +143,7 @@ if user_message:
         "content": answer
     })
 
-    def connect_google_sheet():
+   def connect_google_sheet():
     credentials = Credentials.from_service_account_info(
         dict(st.secrets["gcp_service_account"]),
         scopes=[
@@ -155,6 +155,7 @@ if user_message:
     client = gspread.authorize(credentials)
     sheet = client.open("Beauty AI Bookings").sheet1
     return sheet
+       
     def save_booking(name, phone, service, date):
     sheet = connect_google_sheet()
 
