@@ -158,7 +158,6 @@ def connect_google_sheet():
        
 def save_booking(name, phone, service, date):
     sheet = connect_google_sheet()
-
     sheet.append_row([
         name,
         phone,
