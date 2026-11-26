@@ -167,3 +167,16 @@ with st.form("appointment_form"):
             st.warning("Please enter your name.")
 
 st.caption("Beauty AI | Powered by Groq")
+
+def connect_google_sheet():
+    credentials = Credentials.from_service_account_info(
+        dict(st.secrets["gcp_service_account"]),
+        scopes=[
+            "https://www.googleapis.com/auth/spreadsheets",
+            "https://www.googleapis.com/auth/drive"
+        ]
+    )
+
+    client = gspread.authorize(credentials)
+    sheet = client.open("Beauty AI Bookings").sheet1
+    return sheet
