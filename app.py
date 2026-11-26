@@ -156,7 +156,7 @@ def connect_google_sheet():
     sheet = client.open("Beauty AI Bookings").sheet1
     return sheet
        
-    def save_booking(name, phone, service, date):
+def save_booking(name, phone, service, date):
     sheet = connect_google_sheet()
 
     sheet.append_row([
