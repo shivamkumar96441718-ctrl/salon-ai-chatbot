@@ -148,6 +148,7 @@ st.subheader("📅 Appointment Request")
 
 with st.form("appointment_form"):
     name = st.text_input("Customer Name")
+    phone = st.text_input("Phone Number")
     service = st.selectbox(
         "Select Service",
         ["Haircut", "Hair Spa", "Facial"]
