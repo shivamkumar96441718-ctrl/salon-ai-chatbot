@@ -180,17 +180,19 @@ with st.form("appointment_form"):
 
     submitted = st.form_submit_button("Submit Request")
 
- if submitted:
-    if name.strip() and phone.strip():
-        try:
-            save_booking(name, phone, service, appointment_date)
-            st.success("Appointment request saved successfully!")
-            st.write("Name:", name)
-            st.write("Phone:", phone)
-            st.write("Service:", service)
-            st.write("Date:", appointment_date)
-            st.info("This is a request, not a confirmed appointment.")
-        except Exception as e:
-            st.error(f"Booking save failed: {e}")
-    else:
-        st.warning("Please enter your name and phone number.")
+    if submitted:
+        if name.strip() and phone.strip():
+            try:
+                save_booking(name, phone, service, appointment_date)
+                st.success("Appointment request saved successfully!")
+                st.write("Name:", name)
+                st.write("Phone:", phone)
+                st.write("Service:", service)
+                st.write("Date:", appointment_date)
+                st.info("This is a request, not a confirmed appointment.")
+
+            except Exception as e:
+                st.error(f"Booking save failed: {e}")
+
+        else:
+            st.warning("Please enter your name and phone number.")
