@@ -179,6 +179,22 @@ st.markdown("""
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+if not st.session_state.messages:
+    with st.chat_message("assistant"):
+        st.markdown("""
+        ### ✨ Welcome to Beauty AI!
+
+        Hello! Welcome to our salon.
+
+        I can help you with:
+        - 💇 Haircut
+        - 🧖 Hair Spa
+        - 🌸 Facial
+        - 📅 Appointment Requests
+
+        **How can I help you today?**
+        """)
+
 # SHOW OLD MESSAGES
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
