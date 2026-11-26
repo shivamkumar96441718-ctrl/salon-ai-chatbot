@@ -1,5 +1,9 @@
 # ✨ Beauty AI Assistant
 
+🚀 **Live Demo:** [Open Beauty AI Assistant]("https://salon-ai-chatbot-lq9nxreyqvaq9cxj3ysdzy.streamlit.app/")
+
+# ✨ Beauty AI Assistant
+
 A smart AI-powered salon chatbot built using Python, Streamlit and Groq AI.
 
 ## 🌟 About the Project
