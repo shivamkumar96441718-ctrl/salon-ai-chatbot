@@ -144,6 +144,32 @@ def save_booking(name, phone, service, date):
     ])
 
 
+# PROFESSIONAL SIDEBAR
+with st.sidebar:
+    st.markdown("""
+    <div style="text-align:center; padding:20px 5px;">
+        <div style="font-size:45px;">✦</div>
+        <h2 style="color:#c4b5fd;">Beauty AI</h2>
+        <p style="color:#94a3b8;">Smart Salon Assistant</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.divider()
+
+    st.markdown("### ✨ Our Services")
+    st.markdown("💇 Haircut")
+    st.markdown("🧖 Hair Spa")
+    st.markdown("🌸 Facial")
+
+    st.divider()
+
+    st.markdown("### 📅 Booking")
+    st.caption("Submit your appointment request using the booking form.")
+
+    st.divider()
+
+    st.caption("Powered by AI")
+
 
 # PREMIUM HEADER
 st.markdown("""
