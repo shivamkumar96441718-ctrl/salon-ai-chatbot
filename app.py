@@ -265,6 +265,23 @@ if user_message:
 st.divider()
 st.subheader("📅 Appointment Request")
 
+st.markdown("""
+<div style="
+    background: linear-gradient(120deg, #21163d, #17152b);
+    border: 1px solid #7546c8;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 15px;
+">
+    <h3 style="color: #e9d5ff; margin: 0;">
+        ✨ Book Your Beauty Session
+    </h3>
+    <p style="color: #c4b5fd; margin-bottom: 0;">
+        Fill in your details to send an appointment request.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
 with st.form("appointment_form"):
     name = st.text_input("Customer Name")
     phone = st.text_input("Phone Number")
