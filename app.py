@@ -41,7 +41,7 @@ def connect_google_sheet():
     )
 
     client_sheet = gspread.authorize(credentials)
-    sheet = client_sheet.open("Beauty AI Bookings").sheet1
+    sheet = client_sheet.open_by_key("https://docs.google.com/spreadsheets/d/1ehgsFLsYz8lfen_ax6uK_Ww8n5EsOK_4CEXy5iUiBBc/edit?gid=0#gid=0").sheet1
 
     return sheet
 
