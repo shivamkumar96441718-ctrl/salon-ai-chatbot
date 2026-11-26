@@ -134,7 +134,7 @@ if user_message:
             st.markdown(answer)
 
         except Exception as e:
-    st.exception(e)
+            st.exception(e)
 
     st.session_state.messages.append({
         "role": "assistant",
