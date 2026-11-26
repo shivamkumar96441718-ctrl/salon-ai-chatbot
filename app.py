@@ -133,7 +133,7 @@ if user_message:
             answer = response.choices[0].message.content
             st.markdown(answer)
 
-  except Exception as e:
+        except Exception as e:
     st.exception(e)
 
     st.session_state.messages.append({
