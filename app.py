@@ -144,11 +144,36 @@ def save_booking(name, phone, service, date):
     ])
 
 
-# WEBSITE DESIGN
-st.title("💇 Beauty AI Assistant")
-st.caption("Your Smart Salon Customer Assistant")
 
-st.divider()
+# PREMIUM HEADER
+st.markdown("""
+<div style="
+    background: linear-gradient(120deg, #17152e, #30205a, #17152e);
+    border: 1px solid #7546c8;
+    border-radius: 22px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 40px rgba(124,58,237,0.18);
+">
+    <div style="font-size: 45px;">✦</div>
+    <h1 style="margin: 5px 0; color: white;">
+        Beauty AI Assistant
+    </h1>
+    <p style="color: #d8b4fe; font-size: 15px;">
+        Your Personal Salon & Beauty Assistant
+    </p>
+    <span style="
+        background: #3b2866;
+        color: #e9d5ff;
+        padding: 7px 15px;
+        border-radius: 30px;
+        font-size: 12px;
+    ">
+        ✨ AI POWERED EXPERIENCE
+    </span>
+</div>
+""", unsafe_allow_html=True)
 
 # CHAT HISTORY
 if "messages" not in st.session_state:
