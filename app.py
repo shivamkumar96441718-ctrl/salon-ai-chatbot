@@ -11,49 +11,90 @@ st.set_page_config(
     layout="centered"
 )
 
-# PREMIUM WEBSITE DESIGN
+
+# DARK PREMIUM DESIGN
 st.markdown("""
 <style>
-    .stApp {
-        background: linear-gradient(135deg, #fff0f6, #f3e8ff);
-    }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-    h1 {
-        color: #7c3aed;
-        text-align: center;
-        font-size: 42px;
-        font-weight: 800;
-    }
+.stApp {
+    background: #090b16;
+    color: #f8fafc;
+    font-family: 'Inter', sans-serif;
+}
 
-    h2, h3 {
-        color: #6d28d9;
-    }
+header[data-testid="stHeader"] {
+    background: transparent;
+}
 
-    .stButton > button {
-        background: linear-gradient(90deg, #9333ea, #ec4899);
-        color: white;
-        border: none;
-        border-radius: 12px;
-        padding: 10px 22px;
-        font-weight: bold;
-    }
+.block-container {
+    max-width: 1000px;
+    padding-top: 2rem;
+}
 
-    .stButton > button:hover {
-        background: #7e22ce;
-        color: white;
-        border: none;
-    }
+h1 {
+    color: #ffffff;
+    font-size: 38px !important;
+    font-weight: 800 !important;
+}
 
-    .stChatMessage {
-        border-radius: 15px;
-        padding: 12px;
-    }
+h2, h3 {
+    color: #e9d5ff;
+}
 
-    input, textarea {
-        border-radius: 10px !important;
-    }
+p, label {
+    color: #cbd5e1;
+}
+
+.stChatMessage {
+    background: #171a2b;
+    border: 1px solid #292d45;
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+[data-testid="stChatInput"] {
+    background: #171a2b;
+    border: 1px solid #8b5cf6;
+    border-radius: 16px;
+}
+
+.stTextInput input, .stDateInput input,
+.stSelectbox div[data-baseweb="select"] {
+    background: #171a2b;
+    color: white;
+    border-radius: 12px;
+}
+
+.stButton button, .stFormSubmitButton button {
+    background: linear-gradient(90deg, #7c3aed, #a855f7);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    min-height: 45px;
+}
+
+.stButton button:hover, .stFormSubmitButton button:hover {
+    border: 1px solid #c4b5fd;
+    color: white;
+    background: #6d28d9;
+}
+
+hr {
+    border-color: #292d45;
+}
+
+[data-testid="stForm"] {
+    background: #121526;
+    padding: 22px;
+    border: 1px solid #292d45;
+    border-radius: 18px;
+}
 </style>
 """, unsafe_allow_html=True)
+
 
 # API KEY
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
