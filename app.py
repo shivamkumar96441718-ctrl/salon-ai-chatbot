@@ -143,33 +143,7 @@ if user_message:
         "content": answer
     })
 
-st.divider()
-st.subheader("📅 Appointment Request")
-
-with st.form("appointment_form"):
-    name = st.text_input("Customer Name")
-    phone = st.text_input("Phone Number")
-    service = st.selectbox(
-        "Select Service",
-        ["Haircut", "Hair Spa", "Facial"]
-    )
-    appointment_date = st.date_input("Appointment Date")
-
-    submitted = st.form_submit_button("Submit Request")
-
-    if submitted:
-        if name.strip():
-            st.success("Demo appointment request received!")
-            st.write("Name:", name)
-            st.write("Service:", service)
-            st.write("Date:", appointment_date)
-            st.info("This is not a confirmed appointment.")
-        else:
-            st.warning("Please enter your name.")
-
-st.caption("Beauty AI | Powered by Groq")
-
-def connect_google_sheet():
+    def connect_google_sheet():
     credentials = Credentials.from_service_account_info(
         dict(st.secrets["gcp_service_account"]),
         scopes=[
@@ -190,6 +164,32 @@ def connect_google_sheet():
         service,
         str(date),
         "New"
-    ])
 
-    return True
+st.divider()
+st.subheader("📅 Appointment Request")
+
+with st.form("appointment_form"):
+    name = st.text_input("Customer Name")
+    phone = st.text_input("Phone Number")
+    service = st.selectbox(
+        "Select Service",
+        ["Haircut", "Hair Spa", "Facial"]
+    )
+    appointment_date = st.date_input("Appointment Date")
+
+    submitted = st.form_submit_button("Submit Request")
+
+ if submitted:
+    if name.strip() and phone.strip():
+        try:
+            save_booking(name, phone, service, appointment_date)
+            st.success("Appointment request saved successfully!")
+            st.write("Name:", name)
+            st.write("Phone:", phone)
+            st.write("Service:", service)
+            st.write("Date:", appointment_date)
+            st.info("This is a request, not a confirmed appointment.")
+        except Exception as e:
+            st.error(f"Booking save failed: {e}")
+    else:
+        st.warning("Please enter your name and phone number.")
