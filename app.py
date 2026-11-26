@@ -2,6 +2,9 @@
 import streamlit as st
 from groq import Groq
 
+import gspread
+from google.oauth2.service_account import Credentials
+
 st.set_page_config(
     page_title="Beauty AI Assistant",
     page_icon="✨",
