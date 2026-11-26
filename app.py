@@ -180,3 +180,15 @@ def connect_google_sheet():
     client = gspread.authorize(credentials)
     sheet = client.open("Beauty AI Bookings").sheet1
     return sheet
+    def save_booking(name, phone, service, date):
+    sheet = connect_google_sheet()
+
+    sheet.append_row([
+        name,
+        phone,
+        service,
+        str(date),
+        "New"
+    ])
+
+    return True
