@@ -133,13 +133,13 @@ if user_message:
             answer = response.choices[0].message.content
             st.markdown(answer)
 
-        except Exception as e:
-            st.exception(e)
 
     st.session_state.messages.append({
         "role": "assistant",
         "content": answer
     })
+        except Exception as e:
+            st.exception(e)
 
 def connect_google_sheet():
     credentials = Credentials.from_service_account_info(
