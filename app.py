@@ -156,6 +156,22 @@ with st.sidebar:
 
     st.divider()
 
+st.markdown("""
+<div style="
+    background:#10251f;
+    border:1px solid #166534;
+    border-radius:12px;
+    padding:10px;
+    text-align:center;
+    margin:10px 0 20px 0;
+">
+    <span style="color:#4ade80;">●</span>
+    <span style="color:#bbf7d0;font-size:13px;">
+        AI Assistant Available
+    </span>
+</div>
+""", unsafe_allow_html=True)
+
     st.markdown("### ✨ Our Services")
     st.markdown("💇 Haircut")
     st.markdown("🧖 Hair Spa")
