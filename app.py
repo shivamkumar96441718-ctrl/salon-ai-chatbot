@@ -11,6 +11,50 @@ st.set_page_config(
     layout="centered"
 )
 
+# PREMIUM WEBSITE DESIGN
+st.markdown("""
+<style>
+    .stApp {
+        background: linear-gradient(135deg, #fff0f6, #f3e8ff);
+    }
+
+    h1 {
+        color: #7c3aed;
+        text-align: center;
+        font-size: 42px;
+        font-weight: 800;
+    }
+
+    h2, h3 {
+        color: #6d28d9;
+    }
+
+    .stButton > button {
+        background: linear-gradient(90deg, #9333ea, #ec4899);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 10px 22px;
+        font-weight: bold;
+    }
+
+    .stButton > button:hover {
+        background: #7e22ce;
+        color: white;
+        border: none;
+    }
+
+    .stChatMessage {
+        border-radius: 15px;
+        padding: 12px;
+    }
+
+    input, textarea {
+        border-radius: 10px !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # API KEY
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
