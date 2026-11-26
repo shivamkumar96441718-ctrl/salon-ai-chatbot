@@ -221,7 +221,10 @@ with col3:
     if st.button("🌸 Facial"):
         quick_message = "Tell me about your facial service."
 
-user_message = st.chat_input("Ask me anything about our salon...")
+user_message = st.chat_input("Ask Beauty AI anything...")
+
+if quick_message:
+    user_message = quick_message
 
 if user_message:
     st.session_state.messages.append({
