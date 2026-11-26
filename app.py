@@ -134,9 +134,7 @@ if user_message:
             st.markdown(answer)
 
         except Exception as e:
-            answer = "Sorry, AI connection failed. Please try again."
-            st.error(answer)
-            st.code(str(e))
+    st.exception(e)
 
     st.session_state.messages.append({
         "role": "assistant",
