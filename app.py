@@ -134,10 +134,10 @@ if user_message:
             st.markdown(answer)
 
 
-     st.session_state.messages.append({
-        "role": "assistant",
-        "content": answer
-    })
+                   st.session_state.messages.append({
+                    "role": "assistant",
+                    "content": answer
+                })
         except Exception as e:
             st.exception(e)
 
