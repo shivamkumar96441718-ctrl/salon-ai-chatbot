@@ -164,6 +164,7 @@ def save_booking(name, phone, service, date):
         service,
         str(date),
         "New"
+    ])
 
 st.divider()
 st.subheader("📅 Appointment Request")
