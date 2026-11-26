@@ -205,6 +205,11 @@ st.markdown("""
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+with st.sidebar:
+    if st.button("🗑️ Clear Chat", use_container_width=True):
+        st.session_state.messages = []
+        st.rerun()
+
 if not st.session_state.messages:
     with st.chat_message("assistant"):
         st.markdown("""
