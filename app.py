@@ -41,7 +41,7 @@ def connect_google_sheet():
     )
 
     client_sheet = gspread.authorize(credentials)
-    sheet = client_sheet.open_by_key("https://docs.google.com/spreadsheets/d/1ehgsFLsYz8lfen_ax6uK_Ww8n5EsOK_4CEXy5iUiBBc/edit?usp=sharing").sheet1
+    sheet = client_sheet.open_by_key("1ehgsFLsYz8lfen_ax6uK_Ww8n5EsOK_4CEXy5iUiBBc").sheet1
 
     return sheet
 
