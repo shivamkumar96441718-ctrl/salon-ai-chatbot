@@ -202,6 +202,25 @@ for message in st.session_state.messages:
 
 
 # CHAT INPUT
+
+st.markdown("### 💡 Quick Questions")
+
+col1, col2, col3 = st.columns(3)
+
+quick_message = None
+
+with col1:
+    if st.button("💇 Haircut"):
+        quick_message = "Tell me about your haircut service."
+
+with col2:
+    if st.button("🧖 Hair Spa"):
+        quick_message = "Tell me about your hair spa service."
+
+with col3:
+    if st.button("🌸 Facial"):
+        quick_message = "Tell me about your facial service."
+
 user_message = st.chat_input("Ask me anything about our salon...")
 
 if user_message:
